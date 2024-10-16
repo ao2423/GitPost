@@ -11,11 +11,12 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up JDK
-      uses: actions/setup-java@v2
+      uses: actions/setup-java@v3
       with:
+        distribution: 'temurin'  # または 'zulu' など
         java-version: '11'
 
     - name: Build with Maven
@@ -24,5 +25,5 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: '<AzureのApp Service名>'  # App Service名を指定
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # 秘密情報を使用
+        app-name: '<AzureのApp Service名>'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
